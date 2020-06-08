@@ -1,0 +1,65 @@
+@prefix ns1: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ns2: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://mapping.example.com/map_shapes_0> a ns2:TriplesMap ;
+    ns1:logicalSource <http://mapping.example.com/source_10> ;
+    ns2:predicateObjectMap <http://mapping.example.com/pom_72>,
+        <http://mapping.example.com/pom_73>,
+        <http://mapping.example.com/pom_74>,
+        <http://mapping.example.com/pom_75> ;
+    ns2:subjectMap <http://mapping.example.com/s_10> .
+
+<http://mapping.example.com/om_73> a ns2:ObjectMap ;
+    ns2:constant "http://vocab.gtfs.org/terms#Shape" ;
+    ns2:termType ns2:IRI .
+
+<http://mapping.example.com/om_74> a ns2:ObjectMap ;
+    ns1:reference "shape_pt_lat" ;
+    ns2:datatype xsd:double ;
+    ns2:termType ns2:Literal .
+
+<http://mapping.example.com/om_75> a ns2:ObjectMap ;
+    ns1:reference "shape_pt_lon" ;
+    ns2:datatype xsd:double ;
+    ns2:termType ns2:Literal .
+
+<http://mapping.example.com/om_76> a ns2:ObjectMap ;
+    ns1:reference "shape_pt_sequence" ;
+    ns2:termType ns2:Literal .
+
+<http://mapping.example.com/pm_72> a ns2:PredicateMap ;
+    ns2:constant rdf:type .
+
+<http://mapping.example.com/pm_73> a ns2:PredicateMap ;
+    ns2:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat> .
+
+<http://mapping.example.com/pm_74> a ns2:PredicateMap ;
+    ns2:constant <http://www.w3.org/2003/01/geo/wgs84_pos#long> .
+
+<http://mapping.example.com/pm_75> a ns2:PredicateMap ;
+    ns2:constant <http://vocab.gtfs.org/terms#pointSequence> .
+
+<http://mapping.example.com/pom_72> a ns2:PredicateObjectMap ;
+    ns2:objectMap <http://mapping.example.com/om_73> ;
+    ns2:predicateMap <http://mapping.example.com/pm_72> .
+
+<http://mapping.example.com/pom_73> a ns2:PredicateObjectMap ;
+    ns2:objectMap <http://mapping.example.com/om_74> ;
+    ns2:predicateMap <http://mapping.example.com/pm_73> .
+
+<http://mapping.example.com/pom_74> a ns2:PredicateObjectMap ;
+    ns2:objectMap <http://mapping.example.com/om_75> ;
+    ns2:predicateMap <http://mapping.example.com/pm_74> .
+
+<http://mapping.example.com/pom_75> a ns2:PredicateObjectMap ;
+    ns2:objectMap <http://mapping.example.com/om_76> ;
+    ns2:predicateMap <http://mapping.example.com/pm_75> .
+
+<http://mapping.example.com/s_10> a ns2:SubjectMap ;
+    ns2:template "http://transport.linkeddata.es/madrid/metro/shape/{shape_id}-{shape_pt_sequence}" .
+
+<http://mapping.example.com/source_10> a ns1:LogicalSource ;
+    ns1:referenceFormulation <http://semweb.mmlab.be/ns/ql#CSV> ;
+    ns1:source "/data/SHAPES.csv" .
+

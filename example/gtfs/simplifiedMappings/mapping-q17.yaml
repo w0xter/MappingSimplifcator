@@ -1,0 +1,45 @@
+mappings:
+  frequencies:
+    po:
+    - [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, "http://vocab.gtfs.org/terms#Frequency"]
+    - [http://vocab.gtfs.org/terms#startTime, $(start_time)]
+    - [http://vocab.gtfs.org/terms#endTime, $(end_time)]
+    - o:
+      - condition:
+          function: equal
+          parameters:
+          - [str1, $(trip_id)]
+          - [str2, $(trip_id)]
+        mapping: trips
+      p: http://vocab.gtfs.org/terms#trip
+    s: http://transport.linkeddata.es/madrid/metro/frequency/$(trip_id)-$(start_time)
+    sources:
+    - [/data/FREQUENCIES.csv~csv]
+  routes:
+    po:
+    - [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, "http://vocab.gtfs.org/terms#Route"]
+    - [http://vocab.gtfs.org/terms#shortName, $(route_short_name)]
+    - [http://vocab.gtfs.org/terms#routeType, "http://transport.linkeddata.es/resource/RouteType/$(route_type)~iri"]
+    s: http://transport.linkeddata.es/madrid/metro/routes/$(route_id)
+    sources:
+    - [/data/ROUTES.csv~csv]
+  trips:
+    po:
+    - [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, "http://vocab.gtfs.org/terms#Trip"]
+    - o:
+      - condition:
+          function: equal
+          parameters:
+          - [str1, $(route_id)]
+          - [str2, $(route_id)]
+        mapping: routes
+      p: http://vocab.gtfs.org/terms#route
+    s: http://transport.linkeddata.es/madrid/metro/trips/$(trip_id)
+    sources:
+    - [/data/TRIPS.csv~csv]
+prefixes: {dc: http://purl.org/dc/elements/1.1/, dct: http://purl.org/dc/terms/,
+  foaf: http://xmlns.com/foaf/0.1/, geo: http://www.w3.org/2003/01/geo/wgs84_pos#,
+  gtfs: http://vocab.gtfs.org/terms#, ql: http://semweb.mmlab.be/ns/ql#, rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#,
+  rdfs: http://www.w3.org/2000/01/rdf-schema#, rev: http://purl.org/stuff/rev#,
+  rml: http://semweb.mmlab.be/ns/rml#, rr: http://www.w3.org/ns/r2rml#, schema: http://schema.org/,
+  xsd: http://www.w3.org/2001/XMLSchema#}
